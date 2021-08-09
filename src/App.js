@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom'
+import Home from './views/Home'
+import Topics from './views/Topics'
 
-function App() {
+// Since routes are regular React components, they
+// may be rendered anywhere in the app, including in
+// child elements.
+//
+// This helps when it's time to code-split your app
+// into multiple bundles because code-splitting a
+// React Router app is the same as code-splitting
+// any other React app.
+
+export default function App () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <Router>
+      <div>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/topics">Topics</Link>
+          </li>
+        </ul>
 
-export default App;
+        <hr />
+
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/topics">
+            <Topics />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  )
+}
